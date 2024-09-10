@@ -110,7 +110,7 @@ public class SocialMediaController {
     @PatchMapping(value = "/messages/{message_id}")
     public ResponseEntity updateMessageByMessageIdHandler(@RequestBody String newMsg, @PathVariable int message_id){
         int rowsAffected = messageService.updateMessageByMessageId(newMsg, message_id);
-        if(rowsAffected > 0){
+        if(rowsAffected == 1){
             return ResponseEntity.status(200).body(1);
         }
         else{

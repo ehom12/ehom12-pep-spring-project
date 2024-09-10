@@ -79,14 +79,24 @@ public class MessageService {
 
     
     public Integer updateMessageByMessageId(String newMsg, int messageId){
-        if(newMsg.length() == 0){
+        int rowsAffected = 0;
+    //  if(newMsg == ""){
+    //  if(newMsg.length() == 0){
+    //  length of blank msg is 19 actually because of json headers
+        if(newMsg.length() == 19){
+            System.out.print("blank length: " + newMsg.length());
+            System.out.print(" | " + newMsg);
           return 0;
         }
         else if (newMsg.length() >= 255){
+            System.out.print("oof ow ouchie: ");
+            System.out.print(newMsg);
             return 0;
         }
-        int rowsAffected = messageRepository.updateByMessageId( messageId, newMsg);
+        rowsAffected = messageRepository.updateByMessageId(messageId, newMsg);
         if(rowsAffected == 1){
+            System.out.print(newMsg);
+            System.out.print(" | length: " + newMsg.length() + " | -->");
             return 1;
         }
         else{
