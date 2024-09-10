@@ -88,7 +88,7 @@ public class MessageService {
     }
 
     public List<Message> getAllMessagesByAccountId(int accountId){
-        
+        return null;
     }
 
 }
