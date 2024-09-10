@@ -77,8 +77,15 @@ public class MessageService {
         }
     }
 
-    public Integer updateMessageByMessageId(Message message){
-        int rowsAffected = messageRepository.updateByMessageId(message.getMessageId(), message.getMessageText());
+    
+    public Integer updateMessageByMessageId(String newMsg, int messageId){
+        if(newMsg.length() == 0){
+          return 0;
+        }
+        else if (newMsg.length() >= 255){
+            return 0;
+        }
+        int rowsAffected = messageRepository.updateByMessageId( messageId, newMsg);
         if(rowsAffected == 1){
             return 1;
         }
@@ -86,9 +93,10 @@ public class MessageService {
             return 0;
         }
     }
-
+ 
     public List<Message> getAllMessagesByAccountId(int accountId){
-        return null;
+        return messageRepository.findMessagesByAccountId(accountId);
     }
+       
 
 }

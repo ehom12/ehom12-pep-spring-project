@@ -106,10 +106,11 @@ public class SocialMediaController {
         }
     }
 
+    
     @PatchMapping(value = "/messages/{message_id}")
-    public ResponseEntity updateMessageByMessageIdHandler(@RequestBody Message message){
-        int rowsAffected = messageService.updateMessageByMessageId(message);
-        if(rowsAffected == 1){
+    public ResponseEntity updateMessageByMessageIdHandler(@RequestBody String newMsg, @PathVariable int message_id){
+        int rowsAffected = messageService.updateMessageByMessageId(newMsg, message_id);
+        if(rowsAffected > 0){
             return ResponseEntity.status(200).body(1);
         }
         else{
@@ -118,7 +119,9 @@ public class SocialMediaController {
     }
 
     @GetMapping(value = "/accounts/{account_id}/messages")
-    public ResponseEntity getAllMessagesByAccountIdHandler(){
-        return ResponseEntity.status(200).body(null);
+    public ResponseEntity getAllMessagesByAccountIdHandler(@PathVariable int account_id){
+        List<Message> returnedMessages = messageService.getAllMessagesByAccountId(account_id);
+        return ResponseEntity.status(200).body(returnedMessages);
     }
+        
 }

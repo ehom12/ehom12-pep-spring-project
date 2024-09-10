@@ -21,14 +21,20 @@ public interface MessageRepository extends JpaRepository<Message, Long>{
     List<Message> findMessages();
     */
 
+ 
+
     int deleteByMessageId(int id);
-
-    @Modifying
-    @Query("UPDATE Message set messageText =:messageTextVar WHERE messageId = :messageVar")
-    int updateByMessageId(@Param("messageId") int messageVar, @Param("messageText") String messageTextVar);
-
     Optional<Message> findMessageByMessageId(int messageId);
 
+    
+    @Modifying
+    @Query("UPDATE Message set messageText =:messageTextVar WHERE messageId = :messageIdVar")
+    int updateByMessageId(@Param("messageIdVar") int messageId, @Param("messageTextVar") String messageText);
+
+     
+
     @Query("FROM Message WHERE postedBy =:accountId")
-    List<Message> findMessagesByAccountId(@Param("postedBy") int accountId);
+    List<Message> findMessagesByAccountId(@Param("accountId")int postedBy);
+    
+  
 }
