@@ -19,6 +19,8 @@ public interface AccountRepository extends JpaRepository<Account, Long>{
     // register users
     Optional<Account> findAccountByUsername(String username);
 
+    Optional<Account> findAccountByAccountId(Integer accountId);
+
     // login users
     @Query("FROM Account WHERE username = :userVar AND password = :passwordVar")
     Optional<Account> loginUser(@Param("userVar") String username, @Param("passwordVar") String password);

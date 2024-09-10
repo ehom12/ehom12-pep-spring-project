@@ -43,4 +43,13 @@ public class AccountService {
 
         return null;
     }
+
+    public Account findUserById(Integer accountId){
+        Optional<Account> optionalAccount = accountRepository.findAccountByAccountId(accountId);
+        if(optionalAccount.isPresent()){
+            return optionalAccount.get();
+        }
+
+        return null;
+    }
 }
